@@ -13,6 +13,7 @@ import pkgHelper.PuzzleViolation;
  * @author Bert.Gibbons
  *
  */
+//my comment
 public class Sudoku extends LatinSquare {
 
 	/**
