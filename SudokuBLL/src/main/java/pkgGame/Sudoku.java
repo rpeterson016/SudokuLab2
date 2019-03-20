@@ -14,9 +14,9 @@ import pkgHelper.PuzzleViolation;
  *
  */
 public class Sudoku extends LatinSquare {
-
+ 
 	/**
-	 * 
+	 * ahsfdoashdf 
 	 * iSize - the length of the width/height of the Sudoku puzzle.
 	 * 
 	 * @version 1.2
