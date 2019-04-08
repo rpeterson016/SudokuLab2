@@ -2,12 +2,17 @@ package pkgGame;
 
 import static org.junit.Assert.*;
 
+import java.lang.reflect.*;
+
 import java.util.Arrays;
+import java.util.ArrayList;
+import org.apache.commons.lang.ArrayUtils;
+
 
 import org.junit.Test;
 
 public class SudokuTest {
-/*
+
 	@Test
 	public void Sudoku_Test1() {
 
@@ -16,6 +21,8 @@ public class SudokuTest {
 		} catch (Exception e) {
 			fail("Test failed to build a Sudoku");
 		}
+		
+		PrintStars();
 
 	}
 
@@ -23,6 +30,8 @@ public class SudokuTest {
 	public void Sudoku_Test2() throws Exception {
 
 		Sudoku s1 = new Sudoku(10);
+		
+		PrintStars();
 
 	}
 
@@ -52,6 +61,8 @@ public class SudokuTest {
 		} catch (Exception e) {
 			fail("Test failed to build a Sudoku");
 		}
+		
+		PrintStars();
 
 	}
 	
@@ -80,6 +91,8 @@ public class SudokuTest {
 		} catch (Exception e) {
 			fail("Test failed to build a Sudoku");
 		}
+		
+		PrintStars();
 
 	}
 	
@@ -98,6 +111,8 @@ public class SudokuTest {
 			fail("Test failed to build a Sudoku");
 		}
 		
+		PrintStars();
+		
 	}
 	
 	@Test
@@ -114,6 +129,8 @@ public class SudokuTest {
 		} catch (Exception e) {
 			fail("Test failed to build a Sudoku");
 		}
+		
+		PrintStars();
 		
 	}
 	
@@ -139,6 +156,8 @@ public class SudokuTest {
 			fail("Test failed to build a Sudoku");
 		}
 		
+		PrintStars();
+		
 	}
 	
 	@Test
@@ -163,6 +182,8 @@ public class SudokuTest {
 			fail("Test failed to build a Sudoku");
 		}
 		
+		PrintStars();
+		
 	}	
 	
 	@Test
@@ -182,6 +203,8 @@ public class SudokuTest {
 		} catch (Exception e) {
 			fail("Test failed to build a Sudoku");
 		}
+		
+		PrintStars();
 		
 	}
 	
@@ -210,6 +233,8 @@ public class SudokuTest {
 		} catch (Exception e) {
 			fail("Test failed to build a Sudoku");
 		}
+		
+		PrintStars();
 	}
 	
 	@Test
@@ -229,7 +254,9 @@ public class SudokuTest {
 			fail("Test failed to build a Sudoku");
 		}
 		
-	}	*/
+		PrintStars();
+		
+	}	
 
 	@Test
 	public void TestRegionNbr()
@@ -257,5 +284,73 @@ public class SudokuTest {
 		
 		assertTrue(Arrays.equals(Region5, s1.getRegion(5)));
 		
+		PrintStars();
+		
 	}
+	
+	@Test
+	public void PrintPuzzle_Test1() {
+		
+		Sudoku s1= null;
+		
+		int[][] puzzle = { 
+				{ 5, 3, 4, 6, 7, 8, 9, 1, 2 }, 
+				{ 6, 7, 2, 1, 9, 5, 3, 4, 8 }, 
+				{ 1, 9, 8, 3, 4, 2, 5, 6, 7 },
+				{ 8, 5, 9, 7, 6, 1, 4, 2, 3 }, 
+				{ 4, 2, 6, 8, 5, 3, 7, 9, 1 }, 
+				{ 7, 1, 3, 9, 2, 4, 8, 5, 6 },
+				{ 9, 6, 1, 5, 3, 7, 2, 8, 4 }, 
+				{ 2, 8, 7, 4, 1, 9, 6, 3, 5 }, 
+				{ 3, 4, 5, 2, 8, 6, 1, 7, 9 } };
+		
+		try {
+			 s1 = new Sudoku(puzzle);
+		} catch (Exception e) {
+			fail("Bad Sudoku");
+		}
+		
+		s1.PrintPuzzle();
+		
+		PrintStars();
+	}
+	
+	private void PrintStars() {
+		for(int i = 0; i < 100; i++) {
+			System.out.print("*");
+		}
+		System.out.print("\n");
+	}
+	
+	/*
+	@Test
+	public void shuffleArray_Test1() {
+		Sudoku s1 = null;
+		int[][] puzzle = { 
+				{ 5, 3, 4, 6, 7, 8, 9, 1, 2 }, 
+				{ 6, 7, 2, 1, 9, 5, 3, 4, 8 }, 
+				{ 1, 9, 8, 3, 4, 2, 5, 6, 7 },
+				{ 8, 5, 9, 7, 6, 1, 4, 2, 3 }, 
+				{ 4, 2, 6, 8, 5, 3, 7, 9, 1 }, 
+				{ 7, 1, 3, 9, 2, 4, 8, 5, 6 },
+				{ 9, 6, 1, 5, 3, 7, 2, 8, 4 }, 
+				{ 2, 8, 7, 4, 1, 9, 6, 3, 5 }, 
+				{ 3, 4, 5, 2, 8, 6, 1, 7, 9 } };
+		
+		int[] array1 = {1,2,3,4,5};
+		ArrayList<Integer> arrL = new ArrayList<Integer>();
+		arrL.add(1);
+		arrL.add(2);
+		arrL.add(3);
+		arrL.add(4);
+		arrL.add(5);
+		Collections.shuffle(arrL);
+		shuffleArray(array1);
+				
+
+		Class cls = s1.getClass();
+		
+
+		Constructor constr = cls.getConstructor(int[][] puzzle);
+		*/
 }

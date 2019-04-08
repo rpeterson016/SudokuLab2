@@ -4,6 +4,12 @@ import pkgEnum.ePuzzleViolation;
 import pkgHelper.LatinSquare;
 import pkgHelper.PuzzleViolation;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+
+import org.apache.commons.lang.ArrayUtils;
+
 /**
  * Sudoku - This class extends LatinSquare, adding methods, constructor to
  * handle Sudoku logic
@@ -13,7 +19,6 @@ import pkgHelper.PuzzleViolation;
  * @author Bert.Gibbons
  *
  */
-//my comment
 public class Sudoku extends LatinSquare {
 
 	/**
@@ -272,4 +277,115 @@ public class Sudoku extends LatinSquare {
 		
 		return true;
 	}
+	
+	/**
+	 * setRegion - Sets the values of the given region.
+	 * 
+	 * @param r
+	 * 			integer representing region
+	 */
+	private void setRegion(int r) {
+
+		int count = 1;
+
+		int i = (r / iSqrtSize) * iSqrtSize;
+		int j = (r % iSqrtSize) * iSqrtSize;		
+		int jMax = j + iSqrtSize;
+		int iMax = i + iSqrtSize;
+
+		for (; i < iMax; i++) {
+			for (j = (r % iSqrtSize) * iSqrtSize; j < jMax; j++) {
+				this.getPuzzle()[i][j] = count++;
+			}
+		}
+	}
+	
+	/**
+	 * shuffleArray - Shuffles a given array.
+	 * 
+	 * @param arr
+	 * 			One dimensional integer array
+	 */
+	private void shuffleArray(int[] arr) {
+		
+		ArrayList<Integer> arrL = new ArrayList<Integer>();
+		
+		for(int i=0; i<arr.length; i++) {
+			arrL.add(arr[i]);
+		}
+		
+		Collections.shuffle(arrL);
+		Collections.shuffle(arrL);
+		
+		for(int i=0; i<arrL.size(); i++) {
+			arr[i] = arrL.get(i);
+		}
+	}
+	
+	/**
+	 * getRegionNbr - Return region number based on given column and row
+	 * 
+	 * @param iCol
+	 * 			Given column number
+	 * @param iRow
+	 * 			Given row number
+	 * @return - Returns region number based on given column and row
+	 */
+	public int getRegionNbr(int iCol, int iRow) {
+		return (iCol / iSqrtSize) + ((iRow / iSqrtSize) * iSqrtSize);
+	}
+	
+	/**
+	 * shuffleRegion - Shuffles the values of a given region
+	 * 
+	 * @param r
+	 * 		region number
+	 */
+	private void shuffleRegion(int r) {
+		int[] reg = getRegion(r);
+		shuffleArray(reg);
+		
+		int count = 0;
+		int i = (r / iSqrtSize) * iSqrtSize;
+		int j = (r % iSqrtSize) * iSqrtSize;		
+		int jMax = j + iSqrtSize;
+		int iMax = i + iSqrtSize;
+
+		for (; i < iMax; i++) {
+			for (j = (r % iSqrtSize) * iSqrtSize; j < jMax; j++) {
+				this.getPuzzle()[i][j] = reg[count];
+				count++;
+			}
+		}
+	}
+	
+	/**
+	 * FillDiagonalRegions - Set the diagonal regions with random values
+	 */
+	private void FillDiagonalRegions() {
+		for(int i = 0; i < iSize; i += iSqrtSize) {
+			int rNum = getRegionNbr(i,i);
+			setRegion(rNum);
+			shuffleRegion(rNum);
+		}
+	}
+	
+	/**
+	 * PrintPuzzle - This method will print the puzzle to the console 
+	 */
+	public void PrintPuzzle() {
+		int puzzle[][] = this.getPuzzle();
+		for (int i = 0; i < puzzle.length; i++) {
+			System.out.println("");
+			for (int j = 0; j < puzzle.length; j++) {
+				System.out.print(puzzle[i][j]);
+				if ((j + 1) % iSqrtSize == 0)
+					System.out.print(" ");
+			}
+			if ((i + 1) % iSqrtSize == 0)
+				System.out.println(" ");
+		}
+	}
+	
+	
 }
